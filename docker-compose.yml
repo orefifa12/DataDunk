@@ -1,0 +1,62 @@
+# docker-compose.yml
+
+services:
+  # PostgreSQL Database Service
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: nba_user
+      POSTGRES_PASSWORD: nba_password
+      POSTGRES_DB: nba_data
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nba_user -d nba_data"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Python Data Processing Service
+  data-processor:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: nba_data
+      DB_USER: nba_user
+      DB_PASSWORD: nba_password
+    volumes:
+      - ./:/app
+      - ./data:/app/data
+    command: >
+      sh -c "
+        echo 'Waiting for database to be ready...' &&
+        python download_dataset.py &&
+        python database_setup.py &&
+        echo 'Data processing complete!'
+      "
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@datadunk.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  postgres_data:
+  pgadmin_data:
