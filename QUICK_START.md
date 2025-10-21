@@ -29,17 +29,17 @@ docker-compose up -d db
 # Create virtual environment and install dependencies
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install psycopg2-binary
+pip install -r backend/requirements.txt
 
 # Test the database
-python3 test_database.py
+python3 backend/test_database.py
 ```
 
 ### Step 4: Query Players! 🎯
 
 ```bash
 # Interactive player queries
-python3 query_players.py
+python3 backend/query_players.py
 
 # Or run direct SQL queries
 psql -h localhost -p 5432 -U nba_user -d nba_data

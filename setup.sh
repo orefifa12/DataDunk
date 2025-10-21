@@ -42,16 +42,16 @@ echo ""
 echo "🐍 Setting up Python environment..."
 python3 -m venv venv
 source venv/bin/activate
-pip install psycopg2-binary
+pip install -r backend/requirements.txt
 
 # Load sample data
 echo ""
 echo "📊 Loading sample data..."
-python3 setup_for_team.py
+python3 backend/setup_for_team.py
 
 echo ""
 echo "✅ Setup complete! You can now:"
-echo "  1. Run: python3 query_players.py"
+echo "  1. Run: python3 backend/query_players.py"
 echo "  2. Or connect directly to the database"
 echo ""
 echo "Database connection:"

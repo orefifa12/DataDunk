@@ -23,15 +23,15 @@ echo.
 echo 🐍 Setting up Python environment...
 python -m venv venv
 call venv\Scripts\activate
-pip install psycopg2-binary
+pip install -r backend\requirements.txt
 
 echo.
 echo 📊 Loading sample data...
-python setup_for_team.py
+python backend\setup_for_team.py
 
 echo.
 echo ✅ Setup complete! You can now:
-echo   1. Run: python query_players.py
+echo   1. Run: python backend\query_players.py
 echo   2. Or connect directly to the database
 echo.
 echo Database connection:

@@ -16,7 +16,7 @@ git clone <your-github-repo-url>
 cd DataDunk
 
 # Run the automated setup
-python3 setup_for_team.py
+python3 backend/setup_for_team.py
 ```
 
 ### Option 2: Manual Setup
@@ -28,10 +28,10 @@ docker-compose up -d db
 # 2. Set up Python environment
 python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install psycopg2-binary
+pip install -r backend/requirements.txt
 
 # 3. Test the setup
-python3 test_database.py
+python3 backend/test_database.py
 ```
 
 ## 🎯 Query NBA Players
@@ -40,7 +40,7 @@ python3 test_database.py
 
 ```bash
 # Run the player query script
-python3 query_players.py
+python3 backend/query_players.py
 ```
 
 ### Direct SQL Queries
@@ -68,8 +68,9 @@ ORDER BY player_name;
 
 - `QUICK_START.md` - Quick setup guide
 - `SETUP.md` - Detailed setup instructions
-- `player_queries.sql` - SQL query examples
-- `query_players.py` - Python query examples
+- `backend/README.md` - Backend documentation
+- `backend/player_queries.sql` - SQL query examples
+- `backend/query_players.py` - Python query examples
 
 ## 🛠️ Troubleshooting
 
