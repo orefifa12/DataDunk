@@ -1,0 +1,34 @@
+# Python / venv
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+pip-wheel-metadata/
+
+# macOS
+.DS_Store
+
+# Local env and secrets (never commit)
+.env
+.env.*
+kaggle.json
+.kaggle.json
+
+# SQLite DB
+cbb.db
+
+# Kaggle/temp downloads
+cbb_*/
+*.zip
+
+# Notebooks
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Logs
+*.log
